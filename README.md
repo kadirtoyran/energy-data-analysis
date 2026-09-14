@@ -53,7 +53,6 @@ The project currently examines:
 ![Renewable electricity share comparison](output/renewable-share-country-comparison.png)
 
 ## Project Structure
-
 output/
 ├── austria-electricity-mix.png
 ├── austria-renewable-generation.png
