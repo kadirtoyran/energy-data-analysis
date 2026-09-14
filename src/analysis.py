@@ -40,6 +40,93 @@ columns = [
 
 austria = austria[columns]
 
+# -----------------------------
+# 4. Key Findings berechnen
+# -----------------------------
+
+# Daten ohne fehlende Werte für den Anteil erneuerbarer Energien
+renewables = austria.dropna(subset=["renewables_share_elec"])
+
+first_renewable = renewables.iloc[0]
+latest_renewable = renewables.iloc[-1]
+
+renewable_change = (
+    latest_renewable["renewables_share_elec"]
+    - first_renewable["renewables_share_elec"]
+)
+
+# Jahr mit dem höchsten Anteil erneuerbarer Energien
+highest_renewable = renewables.loc[
+    renewables["renewables_share_elec"].idxmax()
+]
+
+# Wind
+wind = austria.dropna(subset=["wind_electricity"])
+
+first_wind = wind.iloc[0]
+latest_wind = wind.iloc[-1]
+
+wind_change = (
+    latest_wind["wind_electricity"]
+    - first_wind["wind_electricity"]
+)
+
+# Solar
+solar = austria.dropna(subset=["solar_electricity"])
+
+first_solar = solar.iloc[0]
+latest_solar = solar.iloc[-1]
+
+solar_change = (
+    latest_solar["solar_electricity"]
+    - first_solar["solar_electricity"]
+)
+
+
+# Ergebnisse als Text vorbereiten
+findings = [
+    "--- Key Findings: Austria ---",
+    "",
+    f"Renewable electricity share:",
+    f"{int(first_renewable['year'])}: "
+    f"{first_renewable['renewables_share_elec']:.1f}%",
+    f"{int(latest_renewable['year'])}: "
+    f"{latest_renewable['renewables_share_elec']:.1f}%",
+    f"Change: {renewable_change:+.1f} percentage points",
+    "",
+    f"Highest renewable electricity share:",
+    f"{highest_renewable['renewables_share_elec']:.1f}% "
+    f"in {int(highest_renewable['year'])}",
+    "",
+    f"Wind generation change:",
+    f"{int(first_wind['year'])}: "
+    f"{first_wind['wind_electricity']:.2f} TWh",
+    f"{int(latest_wind['year'])}: "
+    f"{latest_wind['wind_electricity']:.2f} TWh",
+    f"Increase: {wind_change:.2f} TWh",
+    "",
+    f"Solar generation change:",
+    f"{int(first_solar['year'])}: "
+    f"{first_solar['solar_electricity']:.2f} TWh",
+    f"{int(latest_solar['year'])}: "
+    f"{latest_solar['solar_electricity']:.2f} TWh",
+    f"Increase: {solar_change:.2f} TWh"
+]
+
+
+# In der Konsole ausgeben
+for line in findings:
+    print(line)
+
+
+# Zusätzlich als Datei speichern
+with open(
+    "output/key_findings.txt",
+    "w",
+    encoding="utf-8"
+) as file:
+    file.write("\n".join(findings))
+
 print(austria)
 
 
