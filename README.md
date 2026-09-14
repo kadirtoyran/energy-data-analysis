@@ -48,20 +48,17 @@ The project currently examines:
 
 ![Austria renewable generation](output/austria-renewable-generation.png)
 
+### Austria vs. Germany vs. European Union
+
+![Renewable electricity share comparison](output/renewable-share-country-comparison.png)
+
 ## Project Structure
 
-```text
-energy-data-analysis/
-├── data/
-│   └── owid-energy-data.csv
-├── output/
-│   ├── austria-electricity-mix.png
-│   └── austria-renewable-generation.png
-├── src/
-│   └── analysis.py
-├── README.md
-└── requirements.txt
-```
+output/
+├── austria-electricity-mix.png
+├── austria-renewable-generation.png
+├── renewable-share-country-comparison.png
+└── key_findings.txt
 
 ## Installation
 
@@ -83,11 +80,9 @@ Run the analysis:
 python src/analysis.py
 ```
 
-## Next Steps
+## Possible Future Improvements
 
-Planned improvements include:
-
-- calculating key statistics automatically
-- comparing Austria with other European countries
-- analyzing long-term trends
-- adding further visualizations
+- compare additional European countries
+- analyze electricity demand and generation per capita
+- add interactive visualizations
+- automate data retrieval from an API
