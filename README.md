@@ -35,6 +35,8 @@ The project currently examines:
 - Wind electricity generation increased from just **0.07 TWh in 2000** to **8.31 TWh in 2025**.
 - Solar electricity generation grew from virtually **0 TWh in 2000** to **10.31 TWh in 2025**.
 - While hydropower remains a major component of Austria's renewable electricity system, the data shows substantial growth in **wind and especially solar generation** since 2000.
+- In 2025, Austria's renewable electricity share reached **83.6%**, compared with **59.1% in Germany** and **47.7% in the European Union**.
+- Austria's renewable electricity share was therefore **24.5 percentage points higher than Germany's** and **35.9 percentage points higher than the EU average** in 2025.
 
 ## Visualizations
 

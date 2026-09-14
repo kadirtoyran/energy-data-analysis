@@ -201,6 +201,136 @@ plt.savefig(
     "output/austria-renewable-generation.png"
 )
 
+# -----------------------------
+# 6. Vergleich:
+# Österreich vs. Deutschland vs. EU
+# -----------------------------
 
-# Beide Diagramme anzeigen
+# Passende EU-Bezeichnung im Datensatz finden
+available_countries = set(df["country"].dropna().unique())
+
+eu_candidates = [
+    "European Union (27)",
+    "European Union (Ember)",
+    "European Union"
+]
+
+eu_label = next(
+    (country for country in eu_candidates if country in available_countries),
+    None
+)
+
+if eu_label is None:
+    possible_eu_labels = [
+        country
+        for country in available_countries
+        if "European Union" in country
+    ]
+
+    raise ValueError(
+        f"No EU aggregate found. Available EU labels: {possible_eu_labels}"
+    )
+
+
+# Vergleichsdaten auswählen
+comparison = df[
+    (df["country"].isin(["Austria", "Germany", eu_label]))
+    & (df["year"] >= 2000)
+][
+    [
+        "country",
+        "year",
+        "renewables_share_elec"
+    ]
+].dropna().copy()
+
+# -----------------------------
+# 7. Vergleichswerte berechnen
+# -----------------------------
+
+latest_common_year = comparison.groupby("country")["year"].max().min()
+
+latest_comparison = comparison[
+    comparison["year"] == latest_common_year
+]
+
+print(f"\n--- Country Comparison ({latest_common_year}) ---")
+
+for _, row in latest_comparison.iterrows():
+
+    display_name = row["country"]
+
+    if display_name == eu_label:
+        display_name = "European Union"
+
+    print(
+        f"{display_name}: "
+        f"{row['renewables_share_elec']:.1f}%"
+    )
+
+
+# Werte separat holen
+austria_value = latest_comparison.loc[
+    latest_comparison["country"] == "Austria",
+    "renewables_share_elec"
+].iloc[0]
+
+germany_value = latest_comparison.loc[
+    latest_comparison["country"] == "Germany",
+    "renewables_share_elec"
+].iloc[0]
+
+eu_value = latest_comparison.loc[
+    latest_comparison["country"] == eu_label,
+    "renewables_share_elec"
+].iloc[0]
+
+
+print(
+    f"Austria vs Germany: "
+    f"{austria_value - germany_value:+.1f} percentage points"
+)
+
+print(
+    f"Austria vs EU: "
+    f"{austria_value - eu_value:+.1f} percentage points"
+)
+
+# EU-Bezeichnung für das Diagramm vereinfachen
+comparison["country"] = comparison["country"].replace(
+    {eu_label: "European Union"}
+)
+
+
+# Diagramm erstellen
+plt.figure(figsize=(10, 6))
+
+for country in ["Austria", "Germany", "European Union"]:
+
+    country_data = comparison[
+        comparison["country"] == country
+    ].sort_values("year")
+
+    plt.plot(
+        country_data["year"],
+        country_data["renewables_share_elec"],
+        label=country
+    )
+
+
+plt.title("Renewable electricity share: Austria vs Germany vs EU")
+plt.xlabel("Year")
+plt.ylabel("Share of electricity generation (%)")
+
+plt.legend()
+plt.grid(True)
+
+plt.tight_layout()
+
+plt.savefig(
+    "output/renewable-share-country-comparison.png"
+)
+
+
+# Alle drei Diagramme anzeigen
 plt.show()
