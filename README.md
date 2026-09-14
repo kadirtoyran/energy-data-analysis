@@ -28,6 +28,14 @@ The project currently examines:
 - wind power generation
 - solar power generation
 
+## Key Findings
+
+- Austria's renewable electricity share increased from **72.8% in 2000** to **83.6% in 2025**, representing an increase of **10.8 percentage points**.
+- The highest renewable electricity share in the dataset was **86.2% in 2024**.
+- Wind electricity generation increased from just **0.07 TWh in 2000** to **8.31 TWh in 2025**.
+- Solar electricity generation grew from virtually **0 TWh in 2000** to **10.31 TWh in 2025**.
+- While hydropower remains a major component of Austria's renewable electricity system, the data shows substantial growth in **wind and especially solar generation** since 2000.
+
 ## Visualizations
 
 ### Renewable vs. fossil electricity
