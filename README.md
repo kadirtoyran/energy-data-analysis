@@ -14,7 +14,7 @@ The goal is to explore how renewable and fossil electricity generation have chan
 
 ## Data
 
-The project uses the Our World in Data Energy Dataset.
+The project uses the [Our World in Data Energy Dataset](https://github.com/owid/energy-data).
 
 The analysis focuses on Austria and uses data from the year 2000 onwards.
 
@@ -53,11 +53,21 @@ The project currently examines:
 ![Renewable electricity share comparison](output/renewable-share-country-comparison.png)
 
 ## Project Structure
-output/
-├── austria-electricity-mix.png
-├── austria-renewable-generation.png
-├── renewable-share-country-comparison.png
-└── key_findings.txt
+
+```text
+energy-data-analysis/
+├── data/
+│   └── owid-energy-data.csv
+├── output/
+│   ├── austria-electricity-mix.png
+│   ├── austria-renewable-generation.png
+│   ├── renewable-share-country-comparison.png
+│   └── key_findings.txt
+├── src/
+│   └── analysis.py
+├── README.md
+└── requirements.txt
+```
 
 ## Installation
 
@@ -81,7 +91,7 @@ python src/analysis.py
 
 ## Possible Future Improvements
 
-- compare additional European countries
-- analyze electricity demand and generation per capita
-- add interactive visualizations
-- automate data retrieval from an API
+- Compare additional European countries
+- Analyze electricity demand and generation per capita
+- Add interactive visualizations
+- Automate data retrieval from an APIgit 
